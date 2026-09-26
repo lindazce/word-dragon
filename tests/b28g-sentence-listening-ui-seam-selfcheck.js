@@ -1,0 +1,12 @@
+const fs=require('fs');
+const p=fs.readFileSync('patches/b28f-sentence-quest-listening-ladder.patch','utf8');
+const a=(x,m)=>{if(!x)throw new Error(m)};
+a(p.includes('sq-listen-choice')&&p.includes('answerListening'), 'four-choice UI seam missing');
+a(p.includes('WordDragonSentenceListeningLadderAdapter')&&p.includes('WordDragonSentenceListeningQuestion'),'B28-G modules not wired');
+a(p.includes("async function playBlind(){skill().blindListens++;save();await VoiceEngine.say(q.x.s,.62,1.08,'en-US')}"),'playback must not auto-complete listening repair');
+a(p.includes("out=L.answer(Q.isCorrect(choice))"),'answer must be scored');
+a(p.includes("if(!out.success){renderBlind"),'wrong answer must advance ladder');
+a(p.includes("if(q?.repair?.skill==='listening'){finishRepair(true"),'correct listening repair completion missing');
+a(p.includes('setTimeout(()=>toPuzzle()'),'normal quest must continue to sentence puzzle');
+a(p.includes("q.score>=9&&q?.repair?.skill==='speaking'")===false,'patch must not rewrite speaking threshold');
+console.log('B28-G real Sentence Quest listening seam selfcheck PASS');
