@@ -28,7 +28,9 @@ const tests = [
   'tests/b28e-sentence-repair-promise-selfcheck.js',
   'tests/b28e-retest-sampling-seam-selfcheck.js',
   'tests/listening-ladder-selfcheck.js',
-  'tests/sentence-listening-ladder-adapter-selfcheck.js'
+  'tests/sentence-listening-ladder-adapter-selfcheck.js',
+  'tests/sentence-listening-question-selfcheck.js',
+  'tests/b28g-sentence-listening-ui-seam-selfcheck.js'
 ];
 
 let failed = 0;
