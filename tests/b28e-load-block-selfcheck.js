@@ -9,5 +9,7 @@ M.scripts.forEach((src) => assert(block.includes('src="' + src + '?v=028f"'), 'm
 M.styles.forEach((src) => assert(block.includes('href="' + src + '?v=028f"'), 'missing style: ' + src));
 const positions = M.scripts.map((src) => block.indexOf('src="' + src));
 assert(positions.every((p, i) => i === 0 || p > positions[i - 1]), 'script load order differs from manifest');
-assert(M.scripts.at(-3) === 'js/b28e-runtime-hooks.js', 'runtime hooks unexpected manifest position');
+assert(M.scripts.includes('js/gate-recovery-profile-migration.js'), 'profile migration missing');
+assert(M.scripts.indexOf('js/gate-recovery-profile-migration.js') < M.scripts.indexOf('js/gate-recovery-bootstrap.js'), 'migration must load before bootstrap');
+assert(M.scripts.indexOf('js/b28e-runtime-hooks.js') < M.scripts.indexOf('js/gate-recovery-bootstrap.js'), 'runtime hooks must load before bootstrap');
 console.log('B28-F B28-E browser load block selfcheck PASS');
