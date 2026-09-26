@@ -1,0 +1,21 @@
+name: B28-F Selfchecks
+
+on:
+  push:
+    branches:
+      - b28f-gate-recovery
+  workflow_dispatch:
+
+jobs:
+  selfchecks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run B28-F selfchecks
+        run: node tests/run-b28f-selfchecks.js
