@@ -8,7 +8,8 @@ const tests = [
   'tests/gate-recovery-e2e-selfcheck.js',
   'tests/gate-recovery-edge-selfcheck.js',
   'tests/gate-recovery-persistence-selfcheck.js',
-  'tests/gate-recovery-card-selfcheck.js'
+  'tests/gate-recovery-card-selfcheck.js',
+  'tests/gate-repair-launcher-selfcheck.js'
 ];
 
 let failed = 0;
