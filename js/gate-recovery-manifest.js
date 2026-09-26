@@ -19,6 +19,8 @@
     'js/b28e-stage-gate-bridge.js',
     'js/b28e-stage-gate-integration.js',
     'js/b28e-world-map-gate-router.js',
+    'js/b28e-repair-runtime.js',
+    'js/b28e-repair-flow.js',
     'js/gate-recovery-map-adapter.js',
     'js/gate-recovery-bootstrap.js'
   ];
