@@ -36,7 +36,8 @@ const tests = [
   'tests/phrase-chunk-quality-selfcheck.js',
   'tests/sentence-phrase-power-selfcheck.js',
   'tests/b28h-sentence-phrase-ui-seam-selfcheck.js',
-  'tests/b28h-final-index-selfcheck.js'
+  'tests/b28h-final-index-selfcheck.js',
+  'tests/b28h-entrypoint-seam-selfcheck.js'
 ];
 
 let failed = 0;
