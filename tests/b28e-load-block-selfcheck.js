@@ -5,7 +5,7 @@ vm.runInThisContext(fs.readFileSync('js/gate-recovery-manifest.js', 'utf8'));
 const M = global.WordDragonGateRecoveryManifest;
 const block = fs.readFileSync('patches/b28e-index-b28f-load-block.html', 'utf8');
 const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
-const cache = M.version === 'B28-G' ? '028g' : '028f';
+const cache = M.version === 'B28-H' ? '028h' : M.version === 'B28-G' ? '028g' : '028f';
 M.scripts.forEach((src) => assert(block.includes('src="' + src + '?v=' + cache + '"'), 'missing load: ' + src));
 M.styles.forEach((src) => assert(block.includes('href="' + src + '?v=' + cache + '"'), 'missing style: ' + src));
 const positions = M.scripts.map((src) => block.indexOf('src="' + src));
