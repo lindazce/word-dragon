@@ -1,0 +1,15 @@
+/* Word Dragon RC6 B28-H hotfix — keep primary home actions above the fold on phones. */
+@media (max-width:560px){
+  body{overflow-x:hidden}
+  .home-hero,.hero{padding-top:.45rem!important;padding-bottom:.45rem!important;margin-bottom:.4rem!important}
+  .home-hero h1,.hero h1{font-size:1.55rem!important;margin:.15rem 0!important;line-height:1.12!important}
+  .home-hero p,.hero p{margin:.2rem 0!important;line-height:1.25!important}
+  .home-card,.dashboard-card,.card{margin-top:.4rem;margin-bottom:.4rem}
+  .continue-adventure{min-height:48px;margin:.35rem 0!important}
+  .home-actions,.quick-actions{gap:.35rem!important}
+  .home-actions button,.quick-actions button{min-height:42px!important;padding:.5rem .65rem!important}
+}
+@media (max-width:560px) and (max-height:760px){
+  .home-hero p,.hero p{display:none}
+  .home-hero,.hero{padding:.25rem!important}
+}
