@@ -9,13 +9,15 @@
       adapters: global.WordDragonGateRepairActivityAdapters,
       map: global.WordDragonGateRecoveryMapAdapter,
       gate: global.WordDragonStageGateRuntimeAdapter || null,
-      guard: global.WordDragonGateActionGuard || null
+      guard: global.WordDragonGateActionGuard || null,
+      migration: global.WordDragonGateRecoveryProfileMigration || null
     };
   }
 
   function mount(options) {
     const opts = options || {};
-    const { adapters, map, gate, guard } = deps();
+    const { adapters, map, gate, guard, migration } = deps();
+    if (migration) migration.migrate(opts.profile);
     const activities = opts.activities || adapters.create(opts.runtime || {});
 
     const runGate = async () => {
