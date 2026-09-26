@@ -19,3 +19,15 @@ jobs:
           node-version: '22'
       - name: Run B28-F selfchecks
         run: node tests/run-b28f-selfchecks.js
+      - name: Package B28-F browser modules
+        run: |
+          mkdir -p b28f-browser-modules/js b28f-browser-modules/css
+          cp js/*.js b28f-browser-modules/js/
+          cp css/gate-recovery-card.css b28f-browser-modules/css/
+      - name: Upload B28-F browser modules
+        uses: actions/upload-artifact@v4
+        with:
+          name: b28f-browser-modules
+          path: b28f-browser-modules/
+          if-no-files-found: error
+          retention-days: 7
