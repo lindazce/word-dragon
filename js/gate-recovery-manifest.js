@@ -18,6 +18,7 @@
     'js/stage-gate-runtime-adapter.js',
     'js/b28e-stage-gate-bridge.js',
     'js/b28e-stage-gate-integration.js',
+    'js/b28e-world-map-gate-router.js',
     'js/gate-recovery-map-adapter.js',
     'js/gate-recovery-bootstrap.js'
   ];
