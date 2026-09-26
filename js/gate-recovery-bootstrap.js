@@ -7,14 +7,34 @@
     if (!global.WordDragonGateRecoveryMapAdapter) throw new Error('gate-recovery-map-adapter.js must load first');
     return {
       adapters: global.WordDragonGateRepairActivityAdapters,
-      map: global.WordDragonGateRecoveryMapAdapter
+      map: global.WordDragonGateRecoveryMapAdapter,
+      gate: global.WordDragonStageGateRuntimeAdapter || null
     };
   }
 
   function mount(options) {
     const opts = options || {};
-    const { adapters, map } = deps();
+    const { adapters, map, gate } = deps();
     const activities = opts.activities || adapters.create(opts.runtime || {});
+
+    const runGate = async () => {
+      if (!gate || typeof opts.runGate !== 'function') {
+        if (typeof opts.onGate === 'function') return opts.onGate({ stageId: opts.stageId });
+        return { status: 'runtime-unavailable' };
+      }
+      const outcome = await gate.run({
+        profile: opts.profile,
+        stageId: opts.stageId,
+        candidateQuestionIds: opts.candidateQuestionIds,
+        questionCount: opts.questionCount,
+        historyDepth: opts.historyDepth,
+        randomFn: opts.randomFn,
+        runGate: opts.runGate
+      });
+      if (typeof opts.onGateResult === 'function') opts.onGateResult(outcome);
+      if (opts.autoRefresh !== false) mount(opts);
+      return outcome;
+    };
 
     return map.mount({
       container: opts.container,
@@ -22,8 +42,8 @@
       stageId: opts.stageId,
       activities,
       autoRefresh: opts.autoRefresh,
-      onGate: opts.onGate,
-      onRetest: opts.onRetest,
+      onGate: runGate,
+      onRetest: runGate,
       onRepair: opts.onRepair,
       onRepairResult: opts.onRepairResult
     });
