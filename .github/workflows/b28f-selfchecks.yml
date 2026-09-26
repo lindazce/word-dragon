@@ -28,6 +28,7 @@ jobs:
           cp css/gate-recovery-card.css b28f-browser-modules/css/
           cp css/listening-ladder.css b28f-browser-modules/css/
           cp css/phrase-power.css b28f-browser-modules/css/
+          cp css/mobile-home-compact.css b28f-browser-modules/css/
       - name: Upload B28-F browser modules
         uses: actions/upload-artifact@v4
         with:
