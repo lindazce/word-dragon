@@ -33,6 +33,6 @@
   global.WordDragonGateRecoveryManifest = {
     version: 'B28-G',
     scripts: scripts.slice(),
-    styles: ['css/gate-recovery-card.css']
+    styles: ['css/gate-recovery-card.css', 'css/listening-ladder.css']
   };
 })(typeof window !== 'undefined' ? window : globalThis);
