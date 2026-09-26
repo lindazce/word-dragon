@@ -1,0 +1,11 @@
+const fs = require('fs');
+const patch = fs.readFileSync('patches/b28e-sentence-quest-repair-promise.patch','utf8');
+const assert=(x,m)=>{if(!x)throw new Error(m)};
+assert(patch.includes('function finishRepair(success'), 'completion seam missing');
+assert(patch.includes("repair?.skill==='listening'"), 'listening completion missing');
+assert(patch.includes("repair?.skill==='sentence'"), 'sentence targeted start missing');
+assert(patch.includes("repair?.skill==='speaking'"), 'speaking targeted start missing');
+assert(patch.includes('score:q.score'), 'speaking score not returned');
+assert(patch.includes('cancelled:true'), 'cancel outcome missing');
+assert(patch.includes('new Promise(resolve=>start'), 'startRepair must return completion Promise');
+console.log('B28-F B28-E Sentence Quest Repair Promise selfcheck PASS');
