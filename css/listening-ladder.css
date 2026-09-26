@@ -1,0 +1,6 @@
+/* Word Dragon RC6 B28-G — compact listening choices, including short mobile screens. */
+.sq-listen-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;margin:.8rem 0}
+.sq-listen-choice{min-height:3rem;padding:.65rem .75rem;border-radius:14px;font-size:1rem;font-weight:700}
+.sq-listening-hint,.sq-full-sentence{margin:.65rem 0;padding:.65rem .8rem;border-radius:12px;line-height:1.35}
+@media (max-width:560px){.sq-listen-choices{gap:.5rem}.sq-listen-choice{min-height:2.75rem;padding:.55rem;font-size:.95rem}}
+@media (max-height:700px){.sq-card .sq-dragon{font-size:2rem;margin:.1rem}.sq-card h1{font-size:1.25rem;margin:.25rem 0}.sq-card p{margin:.25rem 0}.sq-listen-choices{margin:.45rem 0;gap:.4rem}.sq-listen-choice{min-height:2.45rem;padding:.4rem .55rem}.sq-listening-hint,.sq-full-sentence{margin:.35rem 0;padding:.4rem .55rem}}
