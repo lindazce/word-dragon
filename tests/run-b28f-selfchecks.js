@@ -23,7 +23,8 @@ const tests = [
   'tests/b28e-repair-flow-selfcheck.js',
   'tests/b28e-gate-recovery-lifecycle-selfcheck.js',
   'tests/b28e-application-seams-selfcheck.js',
-  'tests/b28e-runtime-hooks-selfcheck.js'
+  'tests/b28e-runtime-hooks-selfcheck.js',
+  'tests/b28e-load-block-selfcheck.js'
 ];
 
 let failed = 0;
