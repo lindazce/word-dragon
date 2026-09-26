@@ -31,7 +31,8 @@ const tests = [
   'tests/sentence-listening-ladder-adapter-selfcheck.js',
   'tests/sentence-listening-question-selfcheck.js',
   'tests/b28g-sentence-listening-ui-seam-selfcheck.js',
-  'tests/b28g-listening-lifecycle-selfcheck.js'
+  'tests/b28g-listening-lifecycle-selfcheck.js',
+  'tests/phrase-chunks-selfcheck.js'
 ];
 
 let failed = 0;
