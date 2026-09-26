@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm');global.window=global;
+for(const p of ['js/listening-ladder.js','js/sentence-listening-ladder-adapter.js'])vm.runInThisContext(fs.readFileSync(p,'utf8'));
+const a=(x,m)=>{if(!x)throw new Error(m)},A=global.WordDragonSentenceListeningLadderAdapter;
+let p={xp:5,stats:{x:{mastered:true}},stageGates:{0:{passed:true}}};
+const frozen=JSON.stringify({xp:p.xp,stats:p.stats,stageGates:p.stageGates});
+let q=A.create(p,{repair:true});
+let v=q.prompt();a(v.level==='blind'&&!v.showPartialHint&&!v.showFullSentence,'blind UI wrong');
+let o=q.answer(false);a(!o.success&&o.prompt.level==='hint'&&o.prompt.showPartialHint,'first miss must show partial hint');
+o=q.answer(false);a(!o.success&&o.prompt.level==='full'&&o.prompt.showFullSentence,'second miss must show full sentence');
+o=q.answer(true);a(o.success&&o.repairCompleted&&o.level==='full'&&!o.blindPerfect,'full recovery wrong');
+q=A.create(p,{repair:true});o=q.answer(true);a(o.blindPerfect&&o.repairCompleted,'blind correct should complete repair');
+q=A.create(p,{repair:true});o=q.cancel();a(!o.success&&!o.repairCompleted,'cancel must not complete repair');
+a(JSON.stringify({xp:p.xp,stats:p.stats,stageGates:p.stageGates})===frozen,'adapter contaminated formal progress');
+console.log('B28-G Sentence Quest listening adapter selfcheck PASS');
