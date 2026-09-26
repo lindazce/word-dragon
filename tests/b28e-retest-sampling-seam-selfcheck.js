@@ -1,0 +1,12 @@
+const fs=require('fs');
+const p=fs.readFileSync('patches/b28e-stage-gate-retest-sampling.patch','utf8');
+const a=(x,m)=>{if(!x)throw new Error(m)};
+a(p.includes('startStageGate(stageIndex,options={})'),'Gate options seam missing');
+a(p.includes('options?.isRetest===true'),'isRetest not consumed');
+a(p.includes('WordDragonGateRetestHistory'),'history integration missing');
+a(p.includes('WordDragonGateRetestSampler'),'sampler integration missing');
+a(p.includes('recentIds(profile,idx,1)'),'previous attempt not queried');
+a(p.includes('resample(pool.map(x=>x.id),prev,need)'),'fresh candidate sampling missing');
+a(p.includes('recordAttempt(profile,idx'),'attempt history not recorded');
+a(p.includes("String(t.kind)+':'+String(t.x?.id??i)"),'question history lacks skill identity');
+console.log('B28-F B28-E Retest sampling seam selfcheck PASS');
