@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm');global.window=global;
+vm.runInThisContext(fs.readFileSync('js/phrase-chunks.js','utf8'));
+const P=global.WordDragonPhraseChunks,a=(x,m)=>{if(!x)throw new Error(m)};
+let p={xp:9,stats:{contrast:{mastered:true}},stageGatePassed:{0:true}},before=JSON.stringify(p);
+let c=P.candidates('The two pictures contrast sharply with each other.','contrast');
+a(c.length>0&&c.some(x=>x.includes('contrast')),'target chunk missing');
+let best=P.pick('We need strong evidence for this conclusion.','evidence');
+a(best.includes('evidence'),'best chunk must contain target');
+P.record(p,best,true);P.record(p,best,false);
+a(p.phraseChunks.attempts===2&&p.phraseChunks.firstPass===1&&p.phraseChunks.recoveries===1,'telemetry wrong');
+a(p.phraseChunks.seen[best]===2,'seen count wrong');
+let after=JSON.parse(before);a(p.xp===after.xp&&JSON.stringify(p.stats)===JSON.stringify(after.stats)&&JSON.stringify(p.stageGatePassed)===JSON.stringify(after.stageGatePassed),'formal progress contaminated');
+console.log('B28-H phrase chunks selfcheck PASS');
