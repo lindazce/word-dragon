@@ -9,4 +9,8 @@ a(x.includes('evidence'),'content target missing');
 for(const [s,w] of [['This method works well in practice.','method'],['They reached an important conclusion after discussion.','conclusion'],['The result depends on careful observation.','result']]){
  const q=P.pick(s,w);a(q.includes(w),w+' target missing');a(q.split(' ').length>=2&&q.split(' ').length<=4,w+' bad chunk length');
 }
+a(P.pick('The baby sleeps quietly after a warm bath.','sleep').includes('sleeps'),'inflected third-person target failed');
+a(P.pick('We arrived at school before eight.','arrive').includes('arrived'),'inflected past target failed');
+a(P.pick('The notebook was cheaper than the others.','cheap').includes('cheaper'),'comparative target failed');
+a(P.pick('We send the card at the post office.','post office').includes('post office'),'multiword target failed');
 console.log('B28-H phrase chunk quality selfcheck PASS');
