@@ -37,7 +37,8 @@ const tests = [
   'tests/sentence-phrase-power-selfcheck.js',
   'tests/b28h-sentence-phrase-ui-seam-selfcheck.js',
   'tests/b28h-final-index-selfcheck.js',
-  'tests/b28h-entrypoint-seam-selfcheck.js'
+  'tests/b28h-entrypoint-seam-selfcheck.js',
+  'tests/sentence-quest-runtime-load-selfcheck.js'
 ];
 
 let failed = 0;
