@@ -7,17 +7,28 @@
     if (!global.WordDragonGateRecoveryCard) throw new Error('gate-recovery-card.js must load first');
     return {
       view: global.WordDragonGateRecoveryViewModel,
-      card: global.WordDragonGateRecoveryCard
+      card: global.WordDragonGateRecoveryCard,
+      coordinator: global.WordDragonGateRepairCoordinator || null
     };
   }
 
   function mount(options) {
     const opts = options || {};
-    const { view, card } = deps();
+    const { view, card, coordinator } = deps();
     const model = view.forMap(opts.profile, opts.stageId);
 
-    return card.mount(opts.container, model, () => {
+    return card.mount(opts.container, model, async () => {
       if (model.state === 'repair') {
+        if (coordinator && opts.activities) {
+          const outcome = await coordinator.continueRepair({
+            profile: opts.profile,
+            stageId: opts.stageId,
+            activities: opts.activities
+          });
+          if (typeof opts.onRepairResult === 'function') opts.onRepairResult(outcome);
+          if (opts.autoRefresh !== false) mount(opts);
+          return;
+        }
         if (typeof opts.onRepair === 'function') opts.onRepair({ stageId: opts.stageId, model });
         return;
       }
