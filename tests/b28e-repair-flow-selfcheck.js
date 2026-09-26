@@ -65,7 +65,8 @@ const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
   });
   out = await failFlow.continueRepair();
   assert(out.status === 'repair-not-counted', 'cancelled repair was counted');
-  assert(C.getRecoveryView(p2, 1).progress.completed === 0, 'cancel advanced progress');
+  const cancelledView = C.getRecoveryView(p2, 1);
+  assert(cancelledView.skills.length === 1 && cancelledView.skills[0].completed === 0, 'cancel advanced progress');
 
   console.log('B28-F B28-E one-tap Repair flow selfcheck PASS');
 })().catch((err) => { console.error(err); process.exit(1); });
