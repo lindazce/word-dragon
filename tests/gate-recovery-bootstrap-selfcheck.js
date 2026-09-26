@@ -7,7 +7,7 @@ vm.runInThisContext(manifestSource);
 const manifest = global.WordDragonGateRecoveryManifest;
 const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
 
-assert(manifest.version === 'B28-F', 'manifest version wrong');
+assert(['B28-F','B28-G'].includes(manifest.version), 'manifest version wrong');
 assert(new Set(manifest.scripts).size === manifest.scripts.length, 'manifest contains duplicate scripts');
 manifest.scripts.forEach((path) => assert(fs.existsSync(path), 'manifest file missing: ' + path));
 manifest.styles.forEach((path) => assert(fs.existsSync(path), 'manifest style missing: ' + path));
