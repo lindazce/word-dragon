@@ -21,6 +21,7 @@
     'js/b28e-world-map-gate-router.js',
     'js/b28e-repair-runtime.js',
     'js/b28e-repair-flow.js',
+    'js/b28e-runtime-hooks.js',
     'js/gate-recovery-map-adapter.js',
     'js/gate-recovery-bootstrap.js'
   ];
