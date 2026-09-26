@@ -63,7 +63,7 @@ const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
   const initialIds = pool.slice(0, 12);
   H.recordAttempt(profile, 0, initialIds);
   const recent = H.recentIds(profile, 0);
-  const retestIds = S.resample(pool, 12, recent, () => 0.42);
+  const retestIds = S.resample(pool, recent, 12, () => 0.42);
   assert(retestIds.length === 12, 'retest sample size wrong');
   assert(new Set(retestIds).size === 12, 'retest sample contains duplicates');
   assert(retestIds.some((id) => !initialIds.includes(id)), 'retest did not use fresh questions');
