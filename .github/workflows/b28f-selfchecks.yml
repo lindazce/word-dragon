@@ -5,6 +5,7 @@ on:
     branches:
       - b28f-gate-recovery
       - b28g-listening-ladder
+      - b28h-phrase-chunks
   workflow_dispatch:
 
 jobs:
