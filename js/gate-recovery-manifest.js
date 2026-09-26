@@ -35,6 +35,6 @@
   global.WordDragonGateRecoveryManifest = {
     version: 'B28-H',
     scripts: scripts.slice(),
-    styles: ['css/gate-recovery-card.css', 'css/listening-ladder.css']
+    styles: ['css/gate-recovery-card.css', 'css/listening-ladder.css', 'css/phrase-power.css']
   };
 })(typeof window !== 'undefined' ? window : globalThis);
