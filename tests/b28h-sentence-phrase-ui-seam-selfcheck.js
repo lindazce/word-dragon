@@ -1,0 +1,11 @@
+const fs=require('fs'),p=fs.readFileSync('patches/b28g-sentence-quest-phrase-power.patch','utf8');
+const a=(x,m)=>{if(!x)throw new Error(m)};
+a(p.includes('WordDragonSentencePhrasePower'),'Phrase Power adapter not wired');
+a(p.includes('sq-phrase-power'),'Phrase Power UI missing');
+a(p.includes('phrasePower:null'),'Phrase Power session missing');
+a(p.includes('correct=!!same()'),'original sentence correctness must remain source of truth');
+a(p.includes('result?.(correct)'),'Phrase Power must consume sentence correctness');
+a(p.includes("q.attempts===1?'✨ Sentence Perfect!'"),'Sentence Perfect rule changed');
+a(p.includes("phrase.firstPass?'Phrase Power!':'Phrase recovered!'"),'Phrase feedback classification missing');
+a(!p.includes('stageGatePassed=')&&!p.includes('.mastered='),'Phrase seam must not write formal progression');
+console.log('B28-H Sentence Quest Phrase Power UI seam selfcheck PASS');
