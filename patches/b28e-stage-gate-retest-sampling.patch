@@ -5,7 +5,7 @@
 +function startStageGate(stageIndex,options={}){ensureStageGateProfile();let idx=Math.max(0,Math.min(STAGES.length-1,Number(stageIndex)||0)),range=stageRange(idx),pool=WORDS.filter(x=>x.id>=range.start&&x.id<=range.end),speech=gateSpeechAvailable(),kinds=speech?['vocabulary','listening','sentence','speaking']:['vocabulary','listening','sentence'],tasks=[],isRetest=options?.isRetest===true,retestHistory=window.WordDragonGateRetestHistory,retestSampler=window.WordDragonGateRetestSampler;
 @@
 -let picks=shuffle(pool).slice(0,need);
-+let picks;if(isRetest&&retestHistory&&retestSampler){let prev=retestHistory.recentIds(profile,idx,1),ids=retestSampler.resample(pool.map(x=>x.id),prev,need),byId=new Map(pool.map(x=>[x.id,x]));picks=ids.map(id=>byId.get(id)).filter(Boolean)}else{picks=shuffle(pool).slice(0,need)}
++let picks;if(isRetest&&retestHistory&&retestSampler){let prev=retestHistory.recentIds(profile,idx,1),ids=retestSampler.resample(pool.map(x=>x.w),prev,need),byId=new Map(pool.map(x=>[x.w,x]));picks=ids.map(id=>byId.get(id)).filter(Boolean)}else{picks=shuffle(pool).slice(0,need)}
 @@
 -gate={idx,tasks:shuffle(tasks),pos:0,correct:0,wrong:[],scores:{},speech};renderStageGateQuestion()
-+gate={idx,tasks:shuffle(tasks),pos:0,correct:0,wrong:[],scores:{},speech,isRetest};if(retestHistory)retestHistory.recordAttempt(profile,idx,gate.tasks.map(t=>t.x?.id).filter(id=>id!==undefined&&id!==null));renderStageGateQuestion()
++gate={idx,tasks:shuffle(tasks),pos:0,correct:0,wrong:[],scores:{},speech,isRetest};if(retestHistory)retestHistory.recordAttempt(profile,idx,gate.tasks.map(t=>t.x?.w).filter(Boolean));renderStageGateQuestion()
