@@ -12,7 +12,8 @@ const tests = [
   'tests/gate-repair-launcher-selfcheck.js',
   'tests/gate-repair-coordinator-selfcheck.js',
   'tests/gate-repair-activity-adapters-selfcheck.js',
-  'tests/stage-gate-runtime-adapter-selfcheck.js'
+  'tests/stage-gate-runtime-adapter-selfcheck.js',
+  'tests/gate-action-guard-selfcheck.js'
 ];
 
 let failed = 0;
