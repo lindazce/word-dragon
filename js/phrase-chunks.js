@@ -7,7 +7,9 @@ const STOP=new Set('a an the to of in on at for from with and or but is are was 
 const WEAK_START=new Set('a an the this that these those it its i you he she we they my your his her our their'.split(' '));
 const PREP=new Set('to of in on at for from with by about into over after before under through between'.split(' '));
 function words(s){return String(s||'').toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g)||[]}
-function variants(t){let v=new Set([t,t+'s',t+'es',t+'ed',t+'ing']);if(t.endsWith('e')){v.add(t.slice(0,-1)+'ed');v.add(t.slice(0,-1)+'ing');v.add(t+'r');v.add(t+'st')}else{v.add(t+'er');v.add(t+'est')}if(/[^aeiou][aeiou][^aeiouwxy]$/.test(t)){let z=t+t.at(-1);v.add(z+'ed');v.add(z+'ing')}if(t.endsWith('y')&&!/[aeiou]y$/.test(t)){v.add(t.slice(0,-1)+'ies');v.add(t.slice(0,-1)+'ied');v.add(t.slice(0,-1)+'ier');v.add(t.slice(0,-1)+'iest')}return v}\nfunction targetSpan(ws,target){const ts=words(target);if(!ts.length)return null;if(ts.length>1){for(let i=0;i+ts.length<=ws.length;i++)if(ts.every((w,j)=>ws[i+j]===w))return [i,i+ts.length];return null}const vs=variants(ts[0]);for(let i=0;i<ws.length;i++)if(vs.has(ws[i]))return [i,i+1];return null}\nfunction score(part,ti){
+function variants(t){let v=new Set([t,t+'s',t+'es',t+'ed',t+'ing']);if(t.endsWith('e')){v.add(t.slice(0,-1)+'ed');v.add(t.slice(0,-1)+'ing');v.add(t+'r');v.add(t+'st')}else{v.add(t+'er');v.add(t+'est')}if(/[^aeiou][aeiou][^aeiouwxy]$/.test(t)){let z=t+t.at(-1);v.add(z+'ed');v.add(z+'ing')}if(t.endsWith('y')&&!/[aeiou]y$/.test(t)){v.add(t.slice(0,-1)+'ies');v.add(t.slice(0,-1)+'ied');v.add(t.slice(0,-1)+'ier');v.add(t.slice(0,-1)+'iest')}return v}
+function targetSpan(ws,target){const ts=words(target);if(!ts.length)return null;if(ts.length>1){for(let i=0;i+ts.length<=ws.length;i++)if(ts.every((w,j)=>ws[i+j]===w))return [i,i+ts.length];return null}const vs=variants(ts[0]);for(let i=0;i<ws.length;i++)if(vs.has(ws[i]))return [i,i+1];return null}
+function score(part,ti){
  const content=part.filter(w=>!STOP.has(w)).length;
  let s=content*5-part.length*.8;
  if(part.length===2)s+=2.5;
