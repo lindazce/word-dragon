@@ -13,4 +13,5 @@ assert(positions.every((p, i) => i === 0 || p > positions[i - 1]), 'script load 
 assert(M.scripts.includes('js/gate-recovery-profile-migration.js'), 'profile migration missing');
 assert(M.scripts.indexOf('js/gate-recovery-profile-migration.js') < M.scripts.indexOf('js/gate-recovery-bootstrap.js'), 'migration must load before bootstrap');
 assert(M.scripts.indexOf('js/b28e-runtime-hooks.js') < M.scripts.indexOf('js/gate-recovery-bootstrap.js'), 'runtime hooks must load before bootstrap');
+if(block.includes('\\\\n')) throw new Error('literal \\\\n token in browser load block');
 console.log(M.version + ' browser load block selfcheck PASS');
