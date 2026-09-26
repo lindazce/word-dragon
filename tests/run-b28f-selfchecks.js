@@ -21,7 +21,8 @@ const tests = [
   'tests/b28e-world-map-gate-router-selfcheck.js',
   'tests/b28e-repair-runtime-selfcheck.js',
   'tests/b28e-repair-flow-selfcheck.js',
-  'tests/b28e-gate-recovery-lifecycle-selfcheck.js'
+  'tests/b28e-gate-recovery-lifecycle-selfcheck.js',
+  'tests/b28e-application-seams-selfcheck.js'
 ];
 
 let failed = 0;
