@@ -8,23 +8,25 @@
     return {
       view: global.WordDragonGateRecoveryViewModel,
       card: global.WordDragonGateRecoveryCard,
-      coordinator: global.WordDragonGateRepairCoordinator || null
+      coordinator: global.WordDragonGateRepairCoordinator || null,
+      guard: global.WordDragonGateActionGuard || null
     };
   }
 
   function mount(options) {
     const opts = options || {};
-    const { view, card, coordinator } = deps();
+    const { view, card, coordinator, guard } = deps();
     const model = view.forMap(opts.profile, opts.stageId);
 
     return card.mount(opts.container, model, async () => {
       if (model.state === 'repair') {
         if (coordinator && opts.activities) {
-          const outcome = await coordinator.continueRepair({
+          const task = () => coordinator.continueRepair({
             profile: opts.profile,
             stageId: opts.stageId,
             activities: opts.activities
           });
+          const outcome = guard ? await guard.run(opts.stageId, 'repair', task) : await task();
           if (typeof opts.onRepairResult === 'function') opts.onRepairResult(outcome);
           if (opts.autoRefresh !== false) mount(opts);
           return;
