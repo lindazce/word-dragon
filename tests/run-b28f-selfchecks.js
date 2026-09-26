@@ -26,7 +26,8 @@ const tests = [
   'tests/b28e-runtime-hooks-selfcheck.js',
   'tests/b28e-load-block-selfcheck.js',
   'tests/b28e-sentence-repair-promise-selfcheck.js',
-  'tests/b28e-retest-sampling-seam-selfcheck.js'
+  'tests/b28e-retest-sampling-seam-selfcheck.js',
+  'tests/listening-ladder-selfcheck.js'
 ];
 
 let failed = 0;
