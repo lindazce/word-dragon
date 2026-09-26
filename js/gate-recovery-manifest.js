@@ -4,6 +4,7 @@
 
   const scripts = [
     'js/phrase-chunks.js',
+    'js/sentence-phrase-power.js',
     'js/listening-ladder.js',
     'js/sentence-listening-ladder-adapter.js',
     'js/sentence-listening-question.js',
