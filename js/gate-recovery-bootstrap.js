@@ -8,13 +8,14 @@
     return {
       adapters: global.WordDragonGateRepairActivityAdapters,
       map: global.WordDragonGateRecoveryMapAdapter,
-      gate: global.WordDragonStageGateRuntimeAdapter || null
+      gate: global.WordDragonStageGateRuntimeAdapter || null,
+      guard: global.WordDragonGateActionGuard || null
     };
   }
 
   function mount(options) {
     const opts = options || {};
-    const { adapters, map, gate } = deps();
+    const { adapters, map, gate, guard } = deps();
     const activities = opts.activities || adapters.create(opts.runtime || {});
 
     const runGate = async () => {
@@ -22,7 +23,7 @@
         if (typeof opts.onGate === 'function') return opts.onGate({ stageId: opts.stageId });
         return { status: 'runtime-unavailable' };
       }
-      const outcome = await gate.run({
+      const task = () => gate.run({
         profile: opts.profile,
         stageId: opts.stageId,
         candidateQuestionIds: opts.candidateQuestionIds,
@@ -31,6 +32,7 @@
         randomFn: opts.randomFn,
         runGate: opts.runGate
       });
+      const outcome = guard ? await guard.run(opts.stageId, 'gate', task) : await task();
       if (typeof opts.onGateResult === 'function') opts.onGateResult(outcome);
       if (opts.autoRefresh !== false) mount(opts);
       return outcome;
