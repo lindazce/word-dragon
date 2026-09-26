@@ -1,0 +1,18 @@
+--- sentence-quest.js.b28g
++++ sentence-quest.js
+@@
+-function start(forcedWord,repair){let pool=wordsForStage();if(!pool.length){repair?.resolve?.({success:false,reason:'no-sentence'});return}let x=(forcedWord&&pool.find(z=>z.w===forcedWord))||pool[Math.floor(Math.random()*pool.length)], target=chunks(x.s);q={x,target,bank:shuffle(target),picked:[],attempts:0,heard:'',score:null,phase:'blind',repair,listening:null,listeningQuestion:null};if(repair?.skill==='speaking'){toRead();return}if(repair?.skill==='sentence'){toPuzzle();return}renderBlind();setTimeout(()=>playBlind(),260)}
++function start(forcedWord,repair){let pool=wordsForStage();if(!pool.length){repair?.resolve?.({success:false,reason:'no-sentence'});return}let x=(forcedWord&&pool.find(z=>z.w===forcedWord))||pool[Math.floor(Math.random()*pool.length)], target=chunks(x.s);q={x,target,bank:shuffle(target),picked:[],attempts:0,heard:'',score:null,phase:'blind',repair,listening:null,listeningQuestion:null,phrasePower:null};if(repair?.skill==='speaking'){toRead();return}if(repair?.skill==='sentence'){toPuzzle();return}renderBlind();setTimeout(()=>playBlind(),260)}
+@@
+-function toPuzzle(){q.phase='puzzle';renderPuzzle()}
++function ensurePhrasePower(){if(q.phrasePower)return q.phrasePower;let P=window.WordDragonSentencePhrasePower;if(!P)return null;q.phrasePower=P.create(WDProfileAccess.get(),q.x.w,q.x.s);return q.phrasePower}
++function toPuzzle(){q.phase='puzzle';ensurePhrasePower();renderPuzzle()}
+@@
+-function renderPuzzle(){let picked=q.picked.map((x,i)=>`<button class="sq-chunk picked" onclick="WDSentenceQuest.unpick(${i})">${esc(x)}</button>`).join(''),bank=q.bank.map((x,i)=>`<button class="sq-chunk" onclick="WDSentenceQuest.pick(${i})">${esc(x)}</button>`).join('');app().innerHTML=shell(`<section class="card sq-card"><div class="sq-step">2 / 3 · Sentence Puzzle</div><h1>拼出你刚才听到的句子</h1><div class="sq-answer">${picked||'<span class="muted">点下面的词块开始拼句子</span>'}</div><div class="sq-bank">${bank}</div><div id="sqFeedback"></div><button class="continue-adventure" onclick="WDSentenceQuest.check()">检查句子</button></section>`)}
++function renderPuzzle(){let picked=q.picked.map((x,i)=>`<button class="sq-chunk picked" onclick="WDSentenceQuest.unpick(${i})">${esc(x)}</button>`).join(''),bank=q.bank.map((x,i)=>`<button class="sq-chunk" onclick="WDSentenceQuest.pick(${i})">${esc(x)}</button>`).join(''),pv=ensurePhrasePower()?.view?.(),power=pv?.active?`<div class="sq-phrase-power"><b>⚡ Phrase Power</b><span>${esc(pv.chunk)}</span></div>`:'';app().innerHTML=shell(`<section class="card sq-card"><div class="sq-step">2 / 3 · Sentence Puzzle</div><h1>拼出你刚才听到的句子</h1>${power}<div class="sq-answer">${picked||'<span class="muted">点下面的词块开始拼句子</span>'}</div><div class="sq-bank">${bank}</div><div id="sqFeedback"></div><button class="continue-adventure" onclick="WDSentenceQuest.check()">检查句子</button></section>`)}
+@@
+-async function check(){q.attempts++;let s=skill();s.puzzles++;if(same()){if(q.attempts===1)s.puzzleFirstPass++;
++async function check(){q.attempts++;let s=skill();s.puzzles++,correct=!!same(),phrase=ensurePhrasePower()?.result?.(correct);if(correct){if(q.attempts===1)s.puzzleFirstPass++;
+@@
+-clearRepair('sentence');s.lastPlayed=Date.now();save();app().querySelector('#sqFeedback').innerHTML=`<div class="feedback good">${q.attempts===1?'✨ Sentence Perfect!':'✓ Good recovery!'}</div>`;
++clearRepair('sentence');s.lastPlayed=Date.now();save();app().querySelector('#sqFeedback').innerHTML=`<div class="feedback good">${q.attempts===1?'✨ Sentence Perfect!':'✓ Good recovery!'}${phrase?.recorded?'<br>⚡ '+(phrase.firstPass?'Phrase Power!':'Phrase recovered!'):''}</div>`;
