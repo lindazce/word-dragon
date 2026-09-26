@@ -6,7 +6,7 @@
 function visibleError(label,err){
  console.error('[Word Dragon '+label+']',err);
  const shade=document.getElementById('modalShade'),body=document.getElementById('modalBody');
- if(shade&&body){body.innerHTML='<div class="modal-card"><h3>🐉 启动失败</h3><p>'+label+' 暂时无法打开。</p><p style="font-size:.82rem;opacity:.75">'+String(err&&err.message||err)+'</p><button onclick="closeModal()">返回</button></div>';shade.classList.add('show')}
+ if(shade&&body){body.innerHTML='<div class="modal-card"><h3>🐉 启动失败</h3><p>'+label+' 暂时无法打开。</p><p style="font-size:.82rem;opacity:.75">'+String(err&&err.message||err)+'</p><button onclick="closeModal()">返回</button></div>';shade.hidden=false;shade.classList.add('show')}
 }
 function invoke(name,label){
  try{
