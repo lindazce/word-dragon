@@ -23,6 +23,7 @@
     'js/b28e-repair-flow.js',
     'js/b28e-runtime-hooks.js',
     'js/gate-recovery-map-adapter.js',
+    'js/gate-recovery-profile-migration.js',
     'js/gate-recovery-bootstrap.js'
   ];
 
