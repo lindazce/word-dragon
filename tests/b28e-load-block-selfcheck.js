@@ -1,0 +1,13 @@
+const fs = require('fs');
+const vm = require('vm');
+global.window = global;
+vm.runInThisContext(fs.readFileSync('js/gate-recovery-manifest.js', 'utf8'));
+const M = global.WordDragonGateRecoveryManifest;
+const block = fs.readFileSync('patches/b28e-index-b28f-load-block.html', 'utf8');
+const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
+M.scripts.forEach((src) => assert(block.includes('src="' + src + '?v=028f"'), 'missing load: ' + src));
+M.styles.forEach((src) => assert(block.includes('href="' + src + '?v=028f"'), 'missing style: ' + src));
+const positions = M.scripts.map((src) => block.indexOf('src="' + src));
+assert(positions.every((p, i) => i === 0 || p > positions[i - 1]), 'script load order differs from manifest');
+assert(M.scripts.at(-3) === 'js/b28e-runtime-hooks.js', 'runtime hooks unexpected manifest position');
+console.log('B28-F B28-E browser load block selfcheck PASS');
