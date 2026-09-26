@@ -5,6 +5,7 @@
   const scripts = [
     'js/listening-ladder.js',
     'js/sentence-listening-ladder-adapter.js',
+    'js/sentence-listening-question.js',
     'js/gate-recovery.js',
     'js/gate-recovery-integration.js',
     'js/gate-recovery-controller.js',
