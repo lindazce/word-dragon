@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm');global.window=global;
+for(const p of ['js/phrase-chunks.js','js/sentence-phrase-power.js'])vm.runInThisContext(fs.readFileSync(p,'utf8'));
+const A=global.WordDragonSentencePhrasePower,a=(x,m)=>{if(!x)throw new Error(m)};
+let p={xp:4,stats:{word:{mastered:true}},stageGatePassed:{0:true}},frozen=JSON.stringify(p);
+let q=A.create(p,'evidence','We need strong evidence for this conclusion.');
+a(q.view().active&&q.view().chunk.includes('evidence'),'Phrase Power target missing');
+let o=q.result(false);a(!o.recorded&&q.view().firstPassEligible===false,'wrong attempt should consume first-pass eligibility');
+o=q.result(true);a(o.recorded&&o.recovery&&!o.firstPass,'recovery classification wrong');
+q=A.create(p,'contrast','The two pictures contrast sharply.');o=q.result(true);
+a(o.firstPass&&!o.recovery,'first-pass classification wrong');
+const before=JSON.parse(frozen);a(p.xp===before.xp&&JSON.stringify(p.stats)===JSON.stringify(before.stats)&&JSON.stringify(p.stageGatePassed)===JSON.stringify(before.stageGatePassed),'Phrase Power contaminated formal progress');
+a(p.phraseChunks.attempts===2&&p.phraseChunks.firstPass===1&&p.phraseChunks.recoveries===1,'Phrase Power telemetry wrong');
+console.log('B28-H Sentence Quest Phrase Power selfcheck PASS');
