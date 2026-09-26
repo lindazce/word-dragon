@@ -16,6 +16,7 @@
     'js/gate-repair-coordinator.js',
     'js/gate-repair-activity-adapters.js',
     'js/stage-gate-runtime-adapter.js',
+    'js/b28e-stage-gate-bridge.js',
     'js/gate-recovery-map-adapter.js',
     'js/gate-recovery-bootstrap.js'
   ];
