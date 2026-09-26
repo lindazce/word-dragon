@@ -1,0 +1,5 @@
+/* Word Dragon RC6 B28-H — Phrase Power cue inside Sentence Quest. */
+.sq-phrase-power{display:flex;align-items:center;justify-content:center;gap:.55rem;flex-wrap:wrap;margin:.55rem auto .75rem;padding:.55rem .75rem;border:1px solid currentColor;border-radius:14px;max-width:34rem}
+.sq-phrase-power b{white-space:nowrap}
+.sq-phrase-power span{font-size:1.05rem;font-weight:700;letter-spacing:.01em}
+@media(max-height:700px){.sq-phrase-power{margin:.3rem auto .45rem;padding:.38rem .55rem}.sq-phrase-power span{font-size:.96rem}}
