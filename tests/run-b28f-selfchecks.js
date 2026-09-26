@@ -17,7 +17,8 @@ const tests = [
   'tests/gate-recovery-migration-selfcheck.js',
   'tests/gate-recovery-bootstrap-selfcheck.js',
   'tests/b28e-stage-gate-bridge-selfcheck.js',
-  'tests/b28e-stage-gate-integration-selfcheck.js'
+  'tests/b28e-stage-gate-integration-selfcheck.js',
+  'tests/b28e-world-map-gate-router-selfcheck.js'
 ];
 
 let failed = 0;
