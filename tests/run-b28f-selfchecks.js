@@ -1,0 +1,27 @@
+/* Run all B28-F Node selfchecks from repository root. */
+const { spawnSync } = require('child_process');
+
+const tests = [
+  'tests/gate-recovery-selfcheck.js',
+  'tests/gate-recovery-controller-selfcheck.js',
+  'tests/gate-retest-sampler-selfcheck.js',
+  'tests/gate-recovery-e2e-selfcheck.js'
+];
+
+let failed = 0;
+for (const test of tests) {
+  const result = spawnSync(process.execPath, [test], { encoding: 'utf8' });
+  const output = (result.stdout || '').trim();
+  if (output) console.log(output);
+  if (result.status !== 0) {
+    failed += 1;
+    console.error(`FAIL: ${test}`);
+    if (result.stderr) console.error(result.stderr.trim());
+  }
+}
+
+if (failed) {
+  console.error(`B28-F selfchecks FAILED: ${failed}/${tests.length}`);
+  process.exit(1);
+}
+console.log(`B28-F selfchecks PASS: ${tests.length}/${tests.length}`);
