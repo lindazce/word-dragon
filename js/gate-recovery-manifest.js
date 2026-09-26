@@ -3,6 +3,8 @@
   'use strict';
 
   const scripts = [
+    'js/listening-ladder.js',
+    'js/sentence-listening-ladder-adapter.js',
     'js/gate-recovery.js',
     'js/gate-recovery-integration.js',
     'js/gate-recovery-controller.js',
@@ -28,7 +30,7 @@
   ];
 
   global.WordDragonGateRecoveryManifest = {
-    version: 'B28-F',
+    version: 'B28-G',
     scripts: scripts.slice(),
     styles: ['css/gate-recovery-card.css']
   };
