@@ -14,14 +14,12 @@
       startSentenceRepair: opts.startSentenceRepair || Runtime.sentenceQuestStarter
     });
 
-    const coordinator = Coordinator.create({
-      profile: opts.profile,
-      stageId: opts.stageId,
-      activities
-    });
-
     async function continueRepair() {
-      const result = await coordinator.continueRepair();
+      const result = await Coordinator.continueRepair({
+        profile: opts.profile,
+        stageId: opts.stageId,
+        activities
+      });
       if (typeof opts.onStateChange === 'function') {
         await opts.onStateChange(result);
       }
