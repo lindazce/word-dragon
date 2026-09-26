@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm');
+global.window=global;
+global.document={getElementById:()=>({innerHTML:'',querySelector:()=>({innerHTML:''})})};
+global.WDProfileAccess={get:()=>({skillProgress:{}}),save:()=>{}};
+global.VoiceEngine={say:()=>{},start:()=>{}};
+global.readScore=()=>0; global.escapeHtml=s=>s; global.WORDS=[];
+vm.runInThisContext(fs.readFileSync(process.argv[2]||'sentence-quest.js','utf8'));
+if(!global.WDSentenceQuest)throw new Error('WDSentenceQuest failed to export');
+if(typeof global.startSentenceQuest!=='function')throw new Error('startSentenceQuest failed to export');
+for(const k of ['start','replay','check','record'])if(typeof global.WDSentenceQuest[k]!=='function')throw new Error('missing runtime export: '+k);
+console.log('Sentence Quest runtime load selfcheck PASS');
