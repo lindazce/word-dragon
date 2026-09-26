@@ -1,0 +1,10 @@
+--- app.js.b28f-prepatch
++++ app.js
+@@
+-profile.stageGates[idx]={passed,score,total,time:Date.now(),skills,wrong,speechAvailable:gateSpeechAvailable()};save();let next=
++profile.stageGates[idx]={passed,score,total,time:Date.now(),skills,wrong,speechAvailable:gateSpeechAvailable()};save();if(typeof window.WDB28FGateFinished==='function'){window.WDB28FGateFinished({profile,stageId:idx,passed,score,total,skills,wrong,speechAvailable:gateSpeechAvailable()})}let next=
+--- world-map.js.b28f-prepatch
++++ world-map.js
+@@
+-onclick="startStageGate(${s.current})"
++onclick="window.WDB28FWorldMapGateAction?WDB28FWorldMapGateAction(${s.current}):startStageGate(${s.current})"
