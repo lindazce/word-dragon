@@ -1,0 +1,22 @@
+/* Word Dragon RC6 B28-F — compact mobile-safe Gate Recovery card. */
+.wd-gate-recovery-card {
+  box-sizing: border-box;
+  width: min(100%, 34rem);
+  margin: 0 auto;
+  padding: 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  overflow-wrap: anywhere;
+}
+.wd-gate-recovery-card h3 { margin: 0.25rem 0 0.5rem; }
+.wd-gate-recovery-badge { font-size: 0.78rem; font-weight: 700; }
+.wd-gate-recovery-progress { margin: 0.35rem 0 0.6rem; }
+.wd-gate-recovery-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
+.wd-gate-recovery-skill { padding: 0.3rem 0.55rem; border-radius: 999px; background: rgba(0,0,0,0.06); font-size: 0.86rem; }
+.wd-gate-recovery-skill.is-done { opacity: 0.72; }
+.wd-gate-recovery-action { width: 100%; min-height: 2.75rem; margin-top: 0.55rem; touch-action: manipulation; }
+@media (max-height: 620px) {
+  .wd-gate-recovery-card { padding: 0.65rem; }
+  .wd-gate-recovery-progress { margin: 0.2rem 0 0.35rem; }
+  .wd-gate-recovery-skills { margin: 0.3rem 0; }
+}
