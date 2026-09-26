@@ -1,0 +1,20 @@
+# Learner/runtime data
+profiles/
+backups/
+*.profile.json
+*.backup.json
+
+# Local HTTPS certificates / private keys
+*.key
+*.pem
+*.p12
+*.pfx
+windows-https/certs/
+windows-https/rootCA*
+
+# Local development artifacts
+*.bak-*
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
