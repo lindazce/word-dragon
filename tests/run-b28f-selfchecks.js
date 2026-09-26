@@ -5,7 +5,8 @@ const tests = [
   'tests/gate-recovery-selfcheck.js',
   'tests/gate-recovery-controller-selfcheck.js',
   'tests/gate-retest-sampler-selfcheck.js',
-  'tests/gate-recovery-e2e-selfcheck.js'
+  'tests/gate-recovery-e2e-selfcheck.js',
+  'tests/gate-recovery-edge-selfcheck.js'
 ];
 
 let failed = 0;
