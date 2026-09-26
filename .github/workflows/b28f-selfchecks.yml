@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - b28f-gate-recovery
+      - b28g-listening-ladder
   workflow_dispatch:
 
 jobs:
