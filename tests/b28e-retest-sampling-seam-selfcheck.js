@@ -8,5 +8,5 @@ a(p.includes('WordDragonGateRetestSampler'),'sampler integration missing');
 a(p.includes('recentIds(profile,idx,1)'),'previous attempt not queried');
 a(p.includes('resample(pool.map(x=>x.id),prev,need)'),'fresh candidate sampling missing');
 a(p.includes('recordAttempt(profile,idx'),'attempt history not recorded');
-a(p.includes("String(t.kind)+':'+String(t.x?.id??i)"),'question history lacks skill identity');
+a(p.includes('gate.tasks.map(t=>t.x?.id).filter'),'attempt history does not use candidate word IDs');
 console.log('B28-F B28-E Retest sampling seam selfcheck PASS');
